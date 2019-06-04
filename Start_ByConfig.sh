@@ -1,9 +1,7 @@
 #!/bin/bash
 source $1
-FullPath=$1
-dir=$(dirname ${FullPath})
-base=$(basename ${FullPath})
+target_dir=$action_target_dir
 
-cd $dir
+cd $target_dir
 
-./$base
+./$action_exe
