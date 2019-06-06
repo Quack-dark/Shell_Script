@@ -1,8 +1,7 @@
 #!/bin/bash
-FullPath=$1
-dir=$(dirname ${FullPath})
-base=$(basename ${FullPath})
+target_path=$1
+target_exe=$2
 
-cd $dir
+cd $target_path
 
-./$base
+./$target_exe &

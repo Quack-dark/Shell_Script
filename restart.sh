@@ -1,11 +1,10 @@
 #!/bin/bash
 
+script_path="/data/xBoxScript/ver"
 if [ $# -lt 1 ]; then
 	echo "Usage: parameter too few"
 	return
 fi
-
-if [ ! -n "$(echo $1| sed -n "/^[0-9]\+$/p")" ]; then
 
 for pid in `ps -e |grep $2|awk '{print $1}'` ;
 do
@@ -13,12 +12,17 @@ do
 	do
 		parent_dir=`dirname $path`/
 		if [ $parent_dir == $1 ]; then
-			kill -9 $pid
+			old_pid=$pid
 		else
-			echo "not found such path"
+			echo "not found old pid"
 		fi
 	done
 done
-else
-	kill -9 $1
-fi
+
+source start.sh $1 $2
+
+cd $script_path
+
+source stop.sh $old_pid
+
+echo "-------Restart $2 ok--------"
